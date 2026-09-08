@@ -1,5 +1,5 @@
 /* =====================================================================
-   Ringecke Boxbedarf — kleines, funktionales JS
+   Ringecke Boxbedarf: kleines, funktionales JS
    Kein Deko-Firlefanz: nur Mobile-Menü + Handschuh-Empfehlung.
    ===================================================================== */
 
@@ -26,16 +26,16 @@
   }
 
   /* ---- oz-Empfehlung nach Körpergewicht (Sparring) ----
-     Richtwerte, wie wir sie auch im Laden geben — keine Wissenschaft,
+     Richtwerte, wie wir sie auch im Laden geben. Keine Wissenschaft,
      sondern Erfahrung: fürs Sparring lieber eine Nummer schwerer. */
   var form = document.getElementById("oz-form");
   var ausgabe = document.getElementById("oz-ergebnis");
 
   function empfehlung(kg) {
-    if (kg < 60)  return { oz: "12 oz", satz: "Leicht genug, dass die Hände nicht ermüden — trotzdem genug Polster fürs Sparring." };
+    if (kg < 60)  return { oz: "12 oz", satz: "Leicht genug, dass die Hände nicht ermüden, trotzdem genug Polster fürs Sparring." };
     if (kg < 70)  return { oz: "14 oz", satz: "Der Allrounder. Passt für die meisten im Vereinstraining." };
     if (kg <= 90) return { oz: "16 oz", satz: "Mehr Polster schützt dich und deinen Partner bei mehr Schlagkraft." };
-    return { oz: "16–18 oz", satz: "Ab dieser Klasse gerne das dickste Polster — deine Partner danken es dir." };
+    return { oz: "16 bis 18 oz", satz: "Ab dieser Klasse gerne das dickste Polster, deine Partner danken es dir." };
   }
 
   if (form && ausgabe) {
@@ -45,7 +45,7 @@
       var kg = parseInt(feld.value, 10);
 
       if (isNaN(kg) || kg < 30 || kg > 180) {
-        ausgabe.innerHTML = "Trag bitte ein Gewicht zwischen 30 und 180&nbsp;kg ein — oder komm einfach vorbei, dann probieren wir’s durch.";
+        ausgabe.innerHTML = "Trag bitte ein Gewicht zwischen 30 und 180&nbsp;kg ein, oder komm einfach vorbei, dann probieren wir’s durch.";
         return;
       }
 

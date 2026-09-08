@@ -1,0 +1,677 @@
+/* =====================================================================
+   Ringecke Boxbedarf — Stylesheet
+   Farbwelt: Leder-Oxblood-Rot, warmes Anthrazit, Knochen/Papier, Messing
+   Typo: Oswald (Headlines, kondensiert) + Work Sans (Fließtext)
+   ===================================================================== */
+
+:root {
+  --rot:        #b81f24;   /* Leder-Rot, Primär */
+  --rot-tief:   #8c1418;   /* dunkles Oxblood */
+  --tinte:      #17130f;   /* warmes Fast-Schwarz */
+  --tinte-weich:#3a332c;
+  --papier:     #efe7d8;   /* Knochen / Hintergrund */
+  --papier-tief:#e4dac7;
+  --karton:     #d8cbb4;   /* Canvas-Mitte */
+  --messing:    #c98a2b;   /* Ocker-Akzent */
+  --weiss:      #f7f2e9;
+
+  --schrift-kopf: "Oswald", "Arial Narrow", sans-serif;
+  --schrift-text: "Work Sans", system-ui, -apple-system, sans-serif;
+
+  --rand: 3px;
+  --breite: 1180px;
+}
+
+/* --------- Grundlagen --------- */
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--schrift-text);
+  color: var(--tinte);
+  background-color: var(--papier);
+  /* dezente Papierstruktur, kein Verlauf-Glow */
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(201,138,43,.05), transparent 40%),
+    radial-gradient(circle at 85% 78%, rgba(140,20,24,.05), transparent 45%);
+  line-height: 1.6;
+  font-size: 1.02rem;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { max-width: 100%; height: auto; }
+
+a { color: var(--rot-tief); }
+
+h1, h2, h3 {
+  font-family: var(--schrift-kopf);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: .3px;
+  margin: 0 0 .5em;
+  color: var(--tinte);
+}
+
+:focus-visible {
+  outline: 3px solid var(--messing);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -999px;
+  top: 0;
+  background: var(--tinte);
+  color: var(--weiss);
+  padding: .6rem 1rem;
+  z-index: 100;
+}
+.skip-link:focus { left: 8px; top: 8px; }
+
+.rot { color: var(--rot); }
+
+.augenbraue {
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--rot-tief);
+  margin: 0 0 .6rem;
+}
+
+/* --------- Knöpfe --------- */
+.knopf {
+  display: inline-block;
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  font-weight: 600;
+  font-size: .95rem;
+  text-decoration: none;
+  padding: .8rem 1.5rem;
+  border: 2px solid var(--tinte);
+  cursor: pointer;
+  transition: transform .12s ease, background-color .15s ease, color .15s ease;
+}
+.knopf--voll {
+  background: var(--rot);
+  border-color: var(--rot);
+  color: var(--weiss);
+}
+.knopf--voll:hover { background: var(--rot-tief); border-color: var(--rot-tief); transform: translateY(-2px); }
+.knopf--linie {
+  background: transparent;
+  color: var(--tinte);
+}
+.knopf--linie:hover { background: var(--tinte); color: var(--papier); transform: translateY(-2px); }
+
+/* --------- Kopf / Navigation --------- */
+.kopf {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  background: var(--papier);
+  border-bottom: 2px solid var(--tinte);
+}
+.kopf__inner {
+  max-width: var(--breite);
+  margin: 0 auto;
+  padding: .7rem 1.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.marke {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  text-decoration: none;
+  color: var(--tinte);
+}
+.marke__wappen { color: var(--rot); display: flex; }
+.marke__text { display: flex; flex-direction: column; line-height: 1; }
+.marke__text strong {
+  font-family: var(--schrift-kopf);
+  font-size: 1.4rem;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+.marke__text em {
+  font-style: normal;
+  font-size: .72rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--tinte-weich);
+  margin-top: 2px;
+}
+
+.hauptnav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.4rem;
+  margin: 0;
+  padding: 0;
+  align-items: center;
+}
+.hauptnav a {
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .92rem;
+  text-decoration: none;
+  color: var(--tinte);
+  padding: .3rem 0;
+  border-bottom: 2px solid transparent;
+}
+.hauptnav a:hover { border-bottom-color: var(--rot); }
+.hauptnav__cta {
+  background: var(--tinte);
+  color: var(--papier) !important;
+  padding: .45rem 1rem !important;
+  border-bottom: none !important;
+}
+.hauptnav__cta:hover { background: var(--rot); }
+
+.nav-schalter {
+  display: none;
+  align-items: center;
+  gap: .5rem;
+  background: none;
+  border: 2px solid var(--tinte);
+  padding: .4rem .7rem;
+  cursor: pointer;
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+.nav-schalter__balken {
+  width: 20px; height: 2px; background: var(--tinte);
+  position: relative;
+}
+.nav-schalter__balken::before,
+.nav-schalter__balken::after {
+  content: ""; position: absolute; left: 0; width: 20px; height: 2px; background: var(--tinte);
+}
+.nav-schalter__balken::before { top: -6px; }
+.nav-schalter__balken::after { top: 6px; }
+
+/* --------- Hero --------- */
+.hero {
+  max-width: var(--breite);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 5rem) 1.3rem 3.5rem;
+  display: grid;
+  grid-template-columns: 1.15fr .85fr;   /* bewusst asymmetrisch */
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  align-items: center;
+}
+.hero__kicker {
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: .82rem;
+  color: var(--rot-tief);
+  margin: 0 0 1rem;
+  padding-left: 2.6rem;
+  position: relative;
+}
+.hero__kicker::before {
+  content: ""; position: absolute; left: 0; top: 50%;
+  width: 2rem; height: 2px; background: var(--rot);
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 5.4vw, 4.2rem);
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+.hero__lauf {
+  font-size: 1.12rem;
+  max-width: 33ch;
+  color: var(--tinte-weich);
+}
+.hero__aktionen {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .9rem;
+  margin: 1.8rem 0 1.3rem;
+}
+.hero__notiz {
+  font-size: .88rem;
+  color: var(--tinte-weich);
+  border-left: 3px solid var(--messing);
+  padding-left: .9rem;
+  max-width: 34ch;
+}
+
+.glove-buehne {
+  background:
+    repeating-linear-gradient(45deg, rgba(23,19,15,.03) 0 8px, transparent 8px 16px),
+    var(--karton);
+  border: 3px solid var(--tinte);
+  padding: 1.5rem;
+  position: relative;
+  box-shadow: 10px 10px 0 rgba(23,19,15,.12);
+}
+.glove-buehne::after {
+  content: "Rindsleder";
+  position: absolute;
+  top: -14px; right: 14px;
+  background: var(--messing);
+  color: var(--tinte);
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: .72rem;
+  padding: .2rem .7rem;
+  border: 2px solid var(--tinte);
+}
+.glove { display: block; margin: 0 auto; width: 100%; max-width: 300px; filter: drop-shadow(0 6px 10px rgba(23,19,15,.15)); }
+.glove-buehne__unter {
+  text-align: center;
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: .82rem;
+  color: var(--tinte-weich);
+  margin: .9rem 0 0;
+}
+
+/* --------- Featured Handschuh --------- */
+.featured {
+  background: var(--tinte);
+  color: var(--papier);
+}
+.featured__kopf {
+  max-width: var(--breite);
+  margin: 0 auto;
+  padding: 3.2rem 1.3rem 0;
+}
+.featured .augenbraue { color: var(--messing); }
+.featured h2 {
+  color: var(--weiss);
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  text-transform: uppercase;
+}
+.featured__raster {
+  max-width: var(--breite);
+  margin: 0 auto;
+  padding: 1.5rem 1.3rem 3.6rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+.featured__flie p {
+  color: #d9cfbf;
+  margin-top: 0;
+}
+.featured__flie p + p { margin-top: 1rem; }
+
+.specs {
+  margin: 0;
+  border-top: 2px solid rgba(239,231,216,.25);
+}
+.specs > div {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1rem;
+  padding: .85rem 0;
+  border-bottom: 1px solid rgba(239,231,216,.18);
+}
+.specs dt {
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .85rem;
+  color: var(--messing);
+}
+.specs dd { margin: 0; color: var(--papier); }
+.specs__preis dd strong { font-size: 1.5rem; font-family: var(--schrift-kopf); color: var(--weiss); }
+.specs__preis dd span { color: #b3a894; font-size: .9rem; }
+
+/* --------- Sortiment --------- */
+.sortiment {
+  max-width: var(--breite);
+  margin: 0 auto;
+  padding: clamp(3rem, 6vw, 5rem) 1.3rem;
+}
+.sortiment__kopf { max-width: 46ch; margin-bottom: 2.2rem; }
+.sortiment__kopf h2 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  text-transform: uppercase;
+}
+.sortiment__kopf p { color: var(--tinte-weich); }
+
+.sortiment__bereich {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+.karte {
+  background: var(--weiss);
+  border: 2px solid var(--tinte);
+  padding: 1.6rem 1.5rem;
+}
+.karte h3 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: var(--rot-tief);
+}
+.karte p { margin: 0; color: var(--tinte-weich); }
+/* bewusst unterschiedlich: eine Karte groß über 2 Spalten, eine dunkel */
+.karte--gross {
+  grid-column: span 2;
+  background: var(--papier-tief);
+  border-left: 8px solid var(--rot);
+}
+.karte__liste {
+  list-style: none;
+  margin: 1.1rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+.karte__liste li {
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: .8px;
+  font-size: .78rem;
+  padding: .3rem .7rem;
+  border: 1.5px solid var(--tinte);
+  background: var(--papier);
+}
+.karte--hinweis {
+  background: var(--tinte);
+  color: var(--papier);
+}
+.karte--hinweis h3 { color: var(--messing); }
+.karte--hinweis p { color: #d9cfbf; }
+.karte__link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .85rem;
+  color: var(--weiss);
+  text-decoration: none;
+  border-bottom: 2px solid var(--rot);
+  padding-bottom: 2px;
+}
+
+/* --------- Größenberatung --------- */
+.groesse {
+  background: var(--karton);
+  border-top: 2px solid var(--tinte);
+  border-bottom: 2px solid var(--tinte);
+}
+.groesse__spalten {
+  max-width: var(--breite);
+  margin: 0 auto;
+  padding: clamp(3rem, 6vw, 5rem) 1.3rem;
+  display: grid;
+  grid-template-columns: 1.4fr .9fr;
+  gap: 2.6rem;
+  align-items: start;
+}
+.groesse h2 {
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  text-transform: uppercase;
+}
+.groesse__wissen p { color: var(--tinte-weich); max-width: 50ch; }
+
+.oz-tabelle {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.6rem;
+  background: var(--weiss);
+  border: 2px solid var(--tinte);
+}
+.oz-tabelle caption {
+  caption-side: bottom;
+  text-align: left;
+  font-size: .82rem;
+  color: var(--tinte-weich);
+  padding: .6rem .2rem 0;
+}
+.oz-tabelle th, .oz-tabelle td {
+  text-align: left;
+  padding: .7rem .9rem;
+  border-bottom: 1px solid var(--karton);
+}
+.oz-tabelle thead th {
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .8rem;
+  background: var(--tinte);
+  color: var(--papier);
+}
+.oz-tabelle tbody th {
+  font-family: var(--schrift-kopf);
+  font-weight: 600;
+  color: var(--rot-tief);
+  white-space: nowrap;
+  width: 8rem;
+}
+.oz-tabelle tbody tr:last-child th,
+.oz-tabelle tbody tr:last-child td { border-bottom: none; }
+
+.rechner {
+  background: var(--tinte);
+  color: var(--papier);
+  padding: 1.8rem 1.6rem;
+  border: 3px solid var(--tinte);
+  box-shadow: 8px 8px 0 rgba(23,19,15,.15);
+}
+.rechner h3 {
+  color: var(--messing);
+  text-transform: uppercase;
+  font-size: 1.4rem;
+}
+.rechner__hinweis { font-size: .92rem; color: #d9cfbf; margin-top: 0; }
+.rechner__form { display: flex; flex-direction: column; gap: .6rem; margin-top: 1.2rem; }
+.rechner__form label {
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .8rem;
+}
+.rechner__form input {
+  padding: .7rem .8rem;
+  border: 2px solid var(--papier);
+  background: var(--papier);
+  color: var(--tinte);
+  font-size: 1.05rem;
+  font-family: var(--schrift-text);
+}
+.rechner__form input:focus-visible { outline-offset: 0; border-color: var(--messing); }
+.rechner__ergebnis {
+  margin: 1.1rem 0 0;
+  font-size: 1.02rem;
+  min-height: 1.2em;
+}
+.rechner__ergebnis strong {
+  font-family: var(--schrift-kopf);
+  font-size: 1.6rem;
+  color: var(--messing);
+  display: block;
+}
+
+/* --------- Über den Laden --------- */
+.laden {
+  max-width: var(--breite);
+  margin: 0 auto;
+  padding: clamp(3rem, 6vw, 5.5rem) 1.3rem;
+}
+.laden__inhalt { max-width: 62ch; }
+.laden h2 {
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  text-transform: uppercase;
+}
+.laden p { color: var(--tinte-weich); font-size: 1.08rem; }
+.laden__signatur {
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--rot-tief) !important;
+  font-size: 1rem;
+  margin-top: 1.4rem;
+}
+
+/* --------- Besuch / Kontakt --------- */
+.besuch {
+  background: var(--tinte);
+  color: var(--papier);
+}
+.besuch__raster {
+  max-width: var(--breite);
+  margin: 0 auto;
+  padding: clamp(3rem, 6vw, 5rem) 1.3rem;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 2.6rem;
+}
+.besuch h2 {
+  color: var(--weiss);
+  font-size: clamp(2rem, 4.4vw, 3rem);
+  text-transform: uppercase;
+}
+.besuch__block p { color: #d9cfbf; }
+.besuch__adresse {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  border-left: 3px solid var(--messing);
+  padding-left: 1rem;
+  margin-top: 1.4rem;
+  color: var(--papier) !important;
+}
+.besuch__block--kontakt h3 {
+  color: var(--messing);
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  margin-top: 0;
+}
+.kontakt__zeiten { margin-top: 2rem !important; }
+.kontaktliste { list-style: none; margin: 0; padding: 0; }
+.kontaktliste li {
+  display: flex;
+  flex-direction: column;
+  padding: .6rem 0;
+  border-bottom: 1px solid rgba(239,231,216,.18);
+}
+.kontaktliste span {
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-size: .74rem;
+  color: #b3a894;
+}
+.kontaktliste a {
+  color: var(--papier);
+  font-size: 1.2rem;
+  text-decoration: none;
+  border-bottom: 2px solid var(--rot);
+  width: max-content;
+  padding-bottom: 2px;
+}
+.kontaktliste a:hover { color: var(--messing); }
+
+.zeiten { width: 100%; border-collapse: collapse; margin-top: .3rem; }
+.zeiten th, .zeiten td {
+  text-align: left;
+  padding: .5rem 0;
+  border-bottom: 1px solid rgba(239,231,216,.14);
+}
+.zeiten th {
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--messing);
+  width: 6rem;
+}
+.zeiten td { color: var(--papier); }
+.besuch__zusatz { font-size: .9rem; margin-top: 1.1rem; }
+
+/* --------- Footer --------- */
+.fuss {
+  background: var(--papier-tief);
+  border-top: 3px solid var(--tinte);
+}
+.fuss__inner {
+  max-width: var(--breite);
+  margin: 0 auto;
+  padding: 2.8rem 1.3rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1.4fr .7fr 1.2fr;
+  gap: 2rem;
+}
+.marke__text--fuss strong { color: var(--tinte); font-size: 1.6rem; }
+.fuss__marke p { color: var(--tinte-weich); max-width: 34ch; margin-top: .8rem; }
+.fuss__nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .5rem; }
+.fuss__nav a {
+  font-family: var(--schrift-kopf);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: .88rem;
+  text-decoration: none;
+  color: var(--tinte);
+}
+.fuss__nav a:hover { color: var(--rot); }
+.fuss__recht p { margin: .2rem 0; color: var(--tinte-weich); font-size: .92rem; }
+.fuss__klein { font-size: .82rem !important; margin-top: .8rem !important; }
+.fuss__klein a { color: var(--rot-tief); }
+.fuss__zeile {
+  max-width: var(--breite);
+  margin: 0 auto;
+  padding: 1rem 1.3rem 1.6rem;
+  border-top: 1px solid var(--karton);
+  font-size: .8rem;
+  color: var(--tinte-weich);
+}
+
+/* =====================================================================
+   Responsive
+   ===================================================================== */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero__bild { order: -1; max-width: 340px; }
+  .featured__raster,
+  .groesse__spalten,
+  .besuch__raster { grid-template-columns: 1fr; }
+  .sortiment__bereich { grid-template-columns: 1fr 1fr; }
+  .karte--gross { grid-column: span 2; }
+  .fuss__inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 640px) {
+  .nav-schalter { display: inline-flex; }
+  .hauptnav {
+    display: none;
+    position: absolute;
+    left: 0; right: 0; top: 100%;
+    background: var(--papier);
+    border-bottom: 2px solid var(--tinte);
+    padding: 1rem 1.3rem 1.4rem;
+  }
+  .hauptnav.ist-offen { display: block; }
+  .hauptnav ul { flex-direction: column; align-items: stretch; gap: .2rem; }
+  .hauptnav li { border-bottom: 1px solid var(--karton); }
+  .hauptnav a { display: block; padding: .8rem 0; }
+  .hauptnav__cta { text-align: center; margin-top: .6rem; }
+
+  .sortiment__bereich { grid-template-columns: 1fr; }
+  .karte--gross { grid-column: span 1; }
+  .fuss__inner { grid-template-columns: 1fr; }
+  .specs > div { grid-template-columns: 1fr; gap: .1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; }
+}

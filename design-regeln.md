@@ -143,3 +143,12 @@ jetzt für ALLE Projekte:
     Kreis um ein wichtiges Element, runde Marker/Bullets, angeschnittene Kreise
     im Farbanker). Sparsam und zum Thema passend einsetzen, nicht plötzlich
     alles abrunden (zu viele runde Ecken sind ihr eigener KI-Tell).
+
+20. **Auch mobil nicht perfekt stapeln.** Auf dem Handy landet oft alles in
+    einer sauber zentrierten/linksbündigen Einspalter, das wirkt maschinell.
+    Gib auch der Mobil-Ansicht "gewachsene" Unregelmäßigkeit: wechselnde
+    Einrückungen, versetzte Elemente, mal eine rechtsbündige Zeile, Texte an
+    einer farbigen Kante. WICHTIG: alle Versätze innerhalb des Seitenrands
+    halten, sonst scrollt die Seite horizontal (Versätze testen! keine
+    Werte, die breiter als der Viewport werden; lange Wörter/Überschriften
+    mobil verkleinern oder umbrechen lassen, `overflow-wrap: break-word`).

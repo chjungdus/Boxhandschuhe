@@ -46,15 +46,17 @@ h1, h2, h3 {
   line-height: 1.02;
   margin: 0 0 .5em;
   color: var(--tinte);
+  overflow-wrap: break-word;
 }
 
 :focus-visible { outline: 3px solid var(--messing); outline-offset: 3px; }
 
 .skip-link {
-  position: absolute; left: -999px; top: 0;
+  position: absolute; left: 8px; top: -48px;
   background: var(--tinte); color: var(--weiss); padding: .6rem 1rem; z-index: 100;
+  transition: top .2s ease;
 }
-.skip-link:focus { left: 8px; top: 8px; }
+.skip-link:focus { top: 8px; }
 
 /* Wiederkehrendes kleines Label, dezent, kein Vollformat pro Sektion */
 .hero__kicker, .modell__label, .groesse__label {
@@ -544,6 +546,55 @@ h1, h2, h3 {
   .warenliste > li { grid-template-columns: 1fr; gap: .5rem; }
   .datenzeilen > div { grid-template-columns: 1fr; gap: .1rem; }
   .anker__unten { flex-direction: column; }
+}
+
+/* ---------------------------------------------------------------------
+   Mobil: bewusst "gewachsene", leicht unregelmäßige Anordnung.
+   Nicht alles klebt an derselben linken Kante; wechselnde Einrückungen
+   und Ausrichtungen. Alle Versätze bleiben im Seitenrand -> kein
+   horizontales Scrollen.
+   --------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  /* Hero: Kicker eingerückt, H1 hängt einen Hauch nach links,
+     Fließtext an einer Ocker-Kante, zweiter Button versetzt */
+  .hero__kicker { margin-left: .35rem; }
+  .hero h1 { margin-left: -.18rem; }
+  .hero__lauf {
+    margin-left: .35rem; padding-left: 1rem;
+    border-left: 2px solid rgba(201,138,43,.5);
+  }
+  .hero__aktionen { align-items: flex-start; }
+  .hero__aktionen .knopf--text { margin-left: 1.5rem; }
+  .hero__bild figcaption { text-align: right; padding-right: .3rem; }
+  .hero__stempel { right: 4%; }
+
+  /* Modell: Titel hängt nach links, Vorlauf schmaler, Preis eingerückt */
+  .modell__label { margin-left: .25rem; }
+  /* "SPARRINGSHANDSCHUH" ist lang -> mobil kleiner, damit es in die Zeile passt */
+  .modell h2 { margin-left: -.22rem; font-size: clamp(1.6rem, 6.4vw, 2.3rem); }
+  .modell__vorlauf { padding-right: 1.4rem; }
+  .modell__preis { padding-left: 1.3rem; }
+
+  /* Sortiment: Intro schmaler, Zeilen abwechselnd eingerückt */
+  .sortiment__intro { padding-right: 1.8rem; }
+  .warenliste > li:nth-child(even) { padding-left: 1.6rem; }
+  .warenliste > li:nth-child(3n) .warenliste__text { padding-left: .7rem; }
+
+  /* Größe: Wissen schmaler, Rechner eingerückt und abgesetzt */
+  .groesse__wissen { padding-right: 1.1rem; }
+  .oz-form { margin-left: 1.3rem; padding-left: .9rem; border-left: 2px solid var(--linie); }
+
+  /* Laden: Zitat eingerückt an roter Kante, Signatur rechts */
+  .laden__zitat {
+    margin-left: .5rem; padding-left: .95rem;
+    border-left: 3px solid var(--rot);
+  }
+  .laden__signatur { text-align: right; padding-right: .3rem; }
+
+  /* Kontakt: Einladung hängt links raus, Text schmaler */
+  .anker__einladung h2 { margin-left: -.22rem; }
+  .anker__einladung p { padding-right: 1.1rem; }
+  .anker__adresse { margin-left: .3rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -14,6 +14,7 @@
   --papier:     #efe7d8;
   --papier-tief:#e7ddcb;
   --messing:    #c98a2b;
+  --gruen:      #2f8f4e;
   --weiss:      #f7f2e9;
   --linie:      rgba(23,19,15,.16);
 
@@ -290,6 +291,8 @@ h1, h2, h3 {
   font-size: .82rem; color: var(--rot-tief);
 }
 .datenzeilen dd { margin: 0; }
+
+.modell__cta { display: flex; flex-wrap: wrap; align-items: center; gap: 1.2rem; margin: 2.2rem 0 0; }
 
 /* =====================================================================
    SORTIMENT — nummerierte Liste, Haarlinien statt Karten
@@ -600,4 +603,176 @@ h1, h2, h3 {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { transition: none !important; }
+}
+
+/* =====================================================================
+   PRODUKTDETAILSEITE (produkt.html)
+   Nutzt dieselben Tokens, Fonts, Header/Footer wie die Startseite.
+   ===================================================================== */
+
+/* Wiederverwendbare, umfärbbare Handschuh-Illustration */
+.rb-glove .g-shadow { fill: rgba(23,19,15,.16); }
+.rb-glove .g-cuff   { fill: #141414; }
+.rb-glove .g-lasche { fill: #1e1c1b; }
+.rb-glove .g-lasche-line { fill: none; stroke: #c22; stroke-width: 2; }
+.rb-glove .g-rb { font-family: var(--schrift-kopf); font-size: 20px; font-weight: 700; fill: #f4ede0; letter-spacing: 1px; }
+.rb-glove .g-body    { fill: var(--g-body, #70747a); }
+.rb-glove .g-body-sh { fill: var(--g-shadow, #4c5054); opacity: .5; }
+.rb-glove .g-thumb   { fill: var(--g-shadow, #4c5054); }
+.rb-glove .g-stitch  { fill: none; stroke: rgba(244,237,224,.55); stroke-width: 1.4; stroke-dasharray: 3 4; }
+.rb-glove .g-patch      { fill: #f4ede0; }
+.rb-glove .g-patch-line { fill: none; stroke: #141414; stroke-width: 2; }
+.rb-glove .g-patch-a { font-family: var(--schrift-kopf); font-size: 13px; font-weight: 700; fill: var(--g-accent, #4c5054); }
+.rb-glove .g-patch-b { font-family: var(--schrift-kopf); font-size: 9px; font-weight: 500; fill: #141414; letter-spacing: 2px; }
+
+/* Farbthemen */
+.theme-grau    { --g-body:#70747a; --g-shadow:#4c5054; --g-accent:#4c5054; }
+.theme-rot     { --g-body:#b81f24; --g-shadow:#8c1418; --g-accent:#b81f24; }
+.theme-schwarz { --g-body:#2c2c2c; --g-shadow:#171717; --g-accent:#2c2c2c; }
+.theme-braun   { --g-body:#7c4a24; --g-shadow:#59341a; --g-accent:#7c4a24; }
+
+/* Brotkrume */
+.krume {
+  max-width: var(--breite); margin: 0 auto;
+  padding: 1.2rem var(--gutter) .3rem;
+  display: flex; flex-wrap: wrap; gap: .5rem; align-items: center;
+  font-size: .85rem; color: var(--tinte-weich);
+}
+.krume a { color: var(--tinte-weich); text-decoration: none; }
+.krume a:hover { color: var(--rot); }
+.krume span:not(.krume__hier) { color: rgba(23,19,15,.35); }
+.krume__hier { color: var(--tinte); }
+
+/* Oberer Bereich: zwei Spalten */
+.pdp-oben {
+  max-width: var(--breite); margin: 0 auto;
+  padding: 1rem var(--gutter) 2.6rem;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 5vw, 3.5rem); align-items: start;
+}
+.pdp-oben > * { min-width: 0; }   /* Grid-Blowout durch lange Inhalte verhindern */
+
+/* Linke Spalte: Bild + Farbwahl */
+.pdp-bild {
+  position: relative; margin: 0;
+  background: var(--papier-tief); border: 1px solid var(--linie);
+  padding: clamp(1.5rem, 4vw, 3rem);
+  display: flex; align-items: center; justify-content: center;
+}
+.pdp-bild__stempel {
+  position: absolute; top: 14px; left: 14px;
+  width: 74px; height: 74px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--papier); border: 2px solid var(--rot);
+  box-shadow: inset 0 0 0 3px var(--papier), inset 0 0 0 5px rgba(184,31,36,.35);
+  transform: rotate(-8deg);
+  font-family: var(--schrift-kopf); text-transform: uppercase; color: var(--rot-tief); line-height: 1;
+}
+.pdp-bild__stempel span { font-size: .5rem; letter-spacing: 1.5px; }
+.pdp-bild__stempel strong { font-size: 1.15rem; margin-top: 2px; }
+.pdp-bild .rb-glove {
+  width: 100%; max-width: 320px; height: auto;
+  filter: drop-shadow(0 14px 18px rgba(23,19,15,.16));
+}
+.pdp-farben { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+.pdp-farbe {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--schrift-text); font-size: .85rem; color: var(--tinte);
+  padding: .45rem .8rem; background: var(--weiss); border: 1px solid var(--linie); cursor: pointer;
+}
+.pdp-farbe.is-active { border-color: var(--tinte); box-shadow: inset 0 0 0 1px var(--tinte); }
+.pdp-farbe__chip { width: 1rem; height: 1rem; border-radius: 50%; border: 1px solid rgba(23,19,15,.3); }
+.chip-grau { background: #70747a; }
+.chip-rot { background: #b81f24; }
+.chip-schwarz { background: #2c2c2c; }
+
+/* Rechte Spalte: Infos */
+.pdp-marke { font-family: var(--schrift-kopf); text-transform: uppercase; letter-spacing: 2px; font-size: .78rem; color: var(--rot-tief); margin: 0 0 .5rem; }
+.pdp-titel { font-size: clamp(1.55rem, 3.1vw, 2.5rem); text-transform: uppercase; margin: 0 0 .5rem; hyphens: none; }
+.pdp-variante { font-family: var(--schrift-kopf); text-transform: uppercase; letter-spacing: 1px; color: var(--tinte-weich); font-size: 1rem; margin: 0 0 1.2rem; }
+
+.pdp-kopfzeile {
+  display: flex; justify-content: space-between; align-items: flex-end; gap: 1rem; flex-wrap: wrap;
+  padding: 1rem 0; border-top: 1px solid var(--linie); border-bottom: 1px solid var(--linie); margin-bottom: 1.4rem;
+}
+.pdp-lager { display: flex; align-items: center; gap: .55rem; margin: 0; font-size: .92rem; color: var(--tinte-weich); max-width: 27ch; }
+.pdp-lager__dot { flex: 0 0 auto; width: .7rem; height: .7rem; border-radius: 50%; background: var(--gruen); box-shadow: 0 0 0 3px rgba(47,143,78,.18); }
+.pdp-preis { display: flex; align-items: baseline; justify-content: flex-end; flex-wrap: wrap; gap: .55rem; text-align: right; }
+.pdp-preis__alt { text-decoration: line-through; color: var(--tinte-weich); font-size: 1rem; }
+.pdp-preis__neu { font-family: var(--schrift-kopf); font-weight: 700; font-size: 2.1rem; color: var(--rot); line-height: 1; }
+.pdp-badge { font-family: var(--schrift-kopf); background: var(--rot); color: var(--weiss); font-size: .8rem; letter-spacing: .5px; padding: .18rem .5rem; }
+
+.pdp-block { margin-bottom: 1.5rem; }
+.pdp-block__label { font-family: var(--schrift-kopf); text-transform: uppercase; letter-spacing: 1px; font-size: .9rem; margin: 0 0 .6rem; }
+.pdp-oz { display: flex; flex-wrap: wrap; gap: .6rem; }
+.pdp-oz__btn {
+  font-family: var(--schrift-kopf); font-size: 1.15rem; width: 3.3rem; height: 3.3rem;
+  border: 2px solid var(--tinte); background: var(--weiss); color: var(--tinte); cursor: pointer;
+  transition: background-color .15s ease, color .15s ease;
+}
+.pdp-oz__btn:hover { background: var(--karton); }
+.pdp-oz__btn.is-active { background: var(--tinte); color: var(--papier); }
+.pdp-oz__hinweis { font-size: .85rem; color: var(--tinte-weich); margin: .7rem 0 0; }
+
+.pdp-kauf { display: flex; flex-wrap: wrap; gap: .9rem; align-items: stretch; margin-bottom: .4rem; }
+.pdp-menge { display: flex; align-items: stretch; border: 2px solid var(--tinte); }
+.pdp-menge__btn { width: 3rem; height: 3.4rem; background: var(--weiss); border: none; font-family: var(--schrift-kopf); font-size: 1.4rem; color: var(--tinte); cursor: pointer; }
+.pdp-menge__btn:hover { background: var(--karton); }
+.pdp-menge__zahl { width: 3rem; height: 3.4rem; text-align: center; font-size: 1.1rem; font-family: var(--schrift-text); color: var(--tinte); background: var(--papier); border: none; border-left: 2px solid var(--tinte); border-right: 2px solid var(--tinte); }
+.pdp-warenkorb {
+  flex: 1; min-width: 210px; padding: 0 1.5rem;
+  background: var(--tinte); color: var(--papier); border: 2px solid var(--tinte);
+  font-family: var(--schrift-kopf); text-transform: uppercase; letter-spacing: 1.5px; font-size: 1.05rem;
+  cursor: pointer; transition: background-color .15s ease, border-color .15s ease;
+}
+.pdp-warenkorb:hover { background: var(--rot); border-color: var(--rot); }
+.pdp-kauf__notiz { min-height: 1.2em; margin: .3rem 0 1rem; color: var(--rot-tief); font-size: .9rem; }
+.pdp-kauf__notiz:empty { min-height: 0; margin: 0; }
+
+.pdp-artnr { font-family: var(--schrift-kopf); text-transform: uppercase; letter-spacing: 1px; font-size: .82rem; color: var(--tinte-weich); margin: .3rem 0 1.1rem; }
+.pdp-service { font-size: .9rem; color: var(--tinte-weich); border-left: 3px solid var(--messing); padding-left: .9rem; margin: 0; }
+.pdp-service a { color: var(--rot-tief); }
+
+/* Tabs */
+.pdp-tabs { max-width: var(--breite); margin: 0 auto; padding: 1rem var(--gutter) 2rem; }
+.pdp-tabs__leiste { display: flex; border-bottom: 2px solid var(--tinte); }
+.pdp-tab {
+  font-family: var(--schrift-kopf); text-transform: uppercase; letter-spacing: 1px; font-size: 1rem;
+  background: none; border: none; padding: .8rem 1.2rem; margin-bottom: -2px; cursor: pointer;
+  color: var(--tinte-weich); border-bottom: 3px solid transparent;
+}
+.pdp-tab.is-active { color: var(--tinte); border-bottom-color: var(--rot); }
+.pdp-panel { padding-top: 1.4rem; max-width: 64ch; }
+.pdp-panel p { color: var(--tinte-weich); margin: 0 0 1rem; }
+.pdp-specs { margin: 0; }
+.pdp-specs > div { display: grid; grid-template-columns: 12rem 1fr; gap: 1rem; padding: .6rem 0; border-bottom: 1px solid var(--linie); }
+.pdp-specs > div:first-child { border-top: 1px solid var(--linie); }
+.pdp-specs dt { font-family: var(--schrift-kopf); text-transform: uppercase; letter-spacing: 1px; font-size: .82rem; color: var(--rot-tief); }
+.pdp-specs dd { margin: 0; color: var(--tinte-weich); }
+
+/* Ähnliche Artikel */
+.pdp-aehnlich { max-width: var(--breite); margin: 0 auto; padding: 1.5rem var(--gutter) 3rem; border-top: 1px solid var(--linie); }
+.pdp-aehnlich h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); text-transform: uppercase; margin: 0 0 1.4rem; }
+.pdp-karten { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem; }
+.warenkarte { display: flex; flex-direction: column; background: var(--weiss); border: 1px solid var(--linie); }
+.warenkarte__bild { display: flex; align-items: center; justify-content: center; padding: 1.4rem; background: var(--papier-tief); border-bottom: 1px solid var(--linie); }
+.warenkarte__bild .rb-glove { width: 100%; max-width: 150px; filter: drop-shadow(0 8px 10px rgba(23,19,15,.15)); }
+.warenkarte h3 { font-size: 1.15rem; text-transform: uppercase; color: var(--rot-tief); margin: 1rem 1rem .3rem; }
+.warenkarte__meta { font-size: .82rem; color: var(--tinte-weich); margin: 0 1rem .6rem; }
+.warenkarte__preis { font-family: var(--schrift-kopf); font-size: 1.4rem; color: var(--tinte); margin: 0 1rem .9rem; }
+.warenkarte__link { align-self: flex-start; margin: auto 1rem 1.1rem; padding: .5rem 1rem; background: var(--tinte); color: var(--weiss); font-family: var(--schrift-kopf); text-transform: uppercase; letter-spacing: 1px; font-size: .85rem; text-decoration: none; }
+.warenkarte__link:hover { background: var(--rot); }
+
+/* Responsive Produktseite */
+@media (max-width: 860px) {
+  .pdp-oben { grid-template-columns: 1fr; }
+  .pdp-karten { grid-template-columns: 1fr 1fr; }
+  .pdp-specs > div { grid-template-columns: 1fr; gap: .1rem; }
+}
+@media (max-width: 560px) {
+  .pdp-karten { grid-template-columns: 1fr; }
+  .pdp-preis { justify-content: flex-start; text-align: left; }
+  .pdp-warenkorb { min-width: 0; width: 100%; }
+  .pdp-menge { width: 100%; justify-content: space-between; }
+  .pdp-menge__zahl { flex: 1; }
 }

@@ -135,3 +135,11 @@ jetzt für ALLE Projekte:
     externen Generatoren/Connectoren für Effekte, die den handbearbeitbaren
     Code aufblähen. prefers-reduced-motion respektieren und nicht
     über-animieren (Über-Animation ist selbst ein KI-Tell).
+
+19. **Formvielfalt: nicht nur Rechtecke.** Eine Seite, die ausschließlich aus
+    eckigen Blöcken und Kästen besteht, wirkt monoton und maschinell. Bring
+    gezielt runde/organische Formen als thematische Akzente ein (z.B.
+    Kreis/Roundel hinter dem Hauptmotiv, runder Craft-Stempel, handgezeichneter
+    Kreis um ein wichtiges Element, runde Marker/Bullets, angeschnittene Kreise
+    im Farbanker). Sparsam und zum Thema passend einsetzen, nicht plötzlich
+    alles abrunden (zu viele runde Ecken sind ihr eigener KI-Tell).

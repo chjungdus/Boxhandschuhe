@@ -119,6 +119,19 @@ jetzt für ALLE Projekte:
 
 16. **Nicht jede Section nach demselben Schema aufbauen** (Label, Überschrift,
     Fließtext, Karten-Reihe). Variiere den inneren Aufbau bewusst:
-    redaktioneller Spread, nummerierte Liste, Datentabelle, schmale
+    redaktioneller Spread, Index-/Glossar-Liste, Datentabelle, schmale
     Erzählspalte mit Randnotiz, großes typografisches Element usw. Zwei
     Sections hintereinander dürfen nicht gleich "ticken".
+
+17. **Keine dekorativen Aufzählungs-Nummern (01, 02, 03 ...) vor Listen-
+    punkten.** Diese großen getönten Ziffern sind ein KI-Template-Tell.
+    Besser ein redaktionelles Index-/Glossar-Layout: Begriff links,
+    Beschreibung rechts, getrennt durch Haarlinien, mit einem dezenten
+    Akzent (z.B. kurzer farbiger Unterstrich unter dem Begriff).
+
+18. **Animationen dezent und in reinem CSS/JS umsetzen.** Sauberes Ein- und
+    Ausblenden per Transition (Menü fadet und schiebt herein, Hamburger
+    morpht zum X, Einträge gestaffelt) statt hartem Umschalten. Keine
+    externen Generatoren/Connectoren für Effekte, die den handbearbeitbaren
+    Code aufblähen. prefers-reduced-motion respektieren und nicht
+    über-animieren (Über-Animation ist selbst ein KI-Tell).

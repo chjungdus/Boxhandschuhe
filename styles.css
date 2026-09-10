@@ -128,11 +128,20 @@ h1, h2, h3 {
   font-family: var(--schrift-kopf); text-transform: uppercase; letter-spacing: 1px; color: var(--tinte);
 }
 .nav-schalter__balken { width: 22px; height: 2px; background: var(--tinte); position: relative; }
+.nav-schalter__balken,
+.nav-schalter__balken::before,
+.nav-schalter__balken::after {
+  transition: transform .3s cubic-bezier(.2,.7,.2,1), top .3s cubic-bezier(.2,.7,.2,1), background-color .2s ease;
+}
 .nav-schalter__balken::before, .nav-schalter__balken::after {
   content: ""; position: absolute; left: 0; width: 22px; height: 2px; background: var(--tinte);
 }
 .nav-schalter__balken::before { top: -7px; }
 .nav-schalter__balken::after { top: 7px; }
+/* Offen: Balken werden zum X */
+.nav-schalter[aria-expanded="true"] .nav-schalter__balken { background: transparent; }
+.nav-schalter[aria-expanded="true"] .nav-schalter__balken::before { top: 0; transform: rotate(45deg); }
+.nav-schalter[aria-expanded="true"] .nav-schalter__balken::after  { top: 0; transform: rotate(-45deg); }
 
 /* =====================================================================
    HERO
@@ -263,28 +272,29 @@ h1, h2, h3 {
 .sortiment__intro h2 { font-size: clamp(2rem, 4.6vw, 3rem); text-transform: uppercase; }
 .sortiment__intro p { color: var(--tinte-weich); margin: 0; }
 
-.warenliste { list-style: none; margin: 0; padding: 0; counter-reset: none; }
+.warenliste { list-style: none; margin: 0; padding: 0; }
 .warenliste > li {
   display: grid;
-  grid-template-columns: 5rem 1fr;
-  gap: clamp(1rem, 4vw, 2.5rem);
-  padding: 1.6rem 0;
+  grid-template-columns: minmax(10rem, 1fr) 2fr;
+  gap: clamp(1rem, 5vw, 3rem);
+  padding: 1.5rem 0;
   border-top: 1px solid var(--linie);
   align-items: baseline;
 }
 .warenliste > li:last-child { border-bottom: 1px solid var(--linie); }
-.warenliste__nr {
-  font-family: var(--schrift-kopf); font-weight: 700;
-  font-size: 2.4rem;
-  color: var(--messing);
-  line-height: 1;
+.warenliste h3 {
+  font-size: clamp(1.4rem, 2.6vw, 1.9rem);
+  text-transform: uppercase;
+  color: var(--tinte);
+  margin: 0;
+  position: relative;
+  padding-bottom: .55rem;
 }
-.warenliste__inhalt h3 {
-  font-size: 1.6rem; text-transform: uppercase; margin-bottom: .4rem; color: var(--rot-tief);
+.warenliste h3::after {
+  content: ""; position: absolute; left: 0; bottom: 0;
+  width: 2.4rem; height: 3px; background: var(--rot);
 }
-.warenliste__inhalt p { margin: 0; color: var(--tinte-weich); max-width: 60ch; }
-/* leichte, „gewachsene“ Asymmetrie */
-.warenliste > li:nth-child(even) .warenliste__inhalt { padding-left: clamp(0rem, 4vw, 3rem); }
+.warenliste__text p { margin: 0; color: var(--tinte-weich); max-width: 58ch; }
 
 /* =====================================================================
    GRÖSSENBERATUNG — Datentabelle + schlanke Inline-Form
@@ -456,18 +466,32 @@ h1, h2, h3 {
 @media (max-width: 600px) {
   .nav-schalter { display: inline-flex; }
   .hauptnav {
-    display: none; position: absolute; left: 0; right: 0; top: 100%;
+    position: absolute; left: 0; right: 0; top: 100%;
     background: var(--papier); border-bottom: 1px solid var(--linie);
-    padding: .8rem var(--gutter) 1.2rem;
+    padding: .4rem var(--gutter) 1.1rem;
+    box-shadow: 0 16px 22px rgba(23,19,15,.09);
+    opacity: 0; visibility: hidden; transform: translateY(-12px);
+    transition: opacity .25s ease, transform .32s cubic-bezier(.2,.7,.2,1), visibility 0s linear .3s;
   }
-  .hauptnav.ist-offen { display: block; }
+  .hauptnav.ist-offen {
+    opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity .25s ease, transform .32s cubic-bezier(.2,.7,.2,1), visibility 0s;
+  }
   .hauptnav ul { flex-direction: column; align-items: stretch; gap: 0; }
-  .hauptnav li { border-bottom: 1px solid var(--linie); }
+  .hauptnav li {
+    border-bottom: 1px solid var(--linie);
+    opacity: 0; transform: translateY(-8px);
+    transition: opacity .3s ease, transform .3s cubic-bezier(.2,.7,.2,1);
+  }
+  .hauptnav.ist-offen li { opacity: 1; transform: translateY(0); }
+  .hauptnav.ist-offen li:nth-child(1) { transition-delay: .06s; }
+  .hauptnav.ist-offen li:nth-child(2) { transition-delay: .11s; }
+  .hauptnav.ist-offen li:nth-child(3) { transition-delay: .16s; }
+  .hauptnav.ist-offen li:nth-child(4) { transition-delay: .21s; }
+  .hauptnav.ist-offen li:nth-child(5) { transition-delay: .26s; }
   .hauptnav a { display: block; padding: .8rem 0; }
 
-  .warenliste > li { grid-template-columns: 3rem 1fr; gap: 1rem; }
-  .warenliste > li:nth-child(even) .warenliste__inhalt { padding-left: 0; }
-  .warenliste__nr { font-size: 1.8rem; }
+  .warenliste > li { grid-template-columns: 1fr; gap: .5rem; }
   .datenzeilen > div { grid-template-columns: 1fr; gap: .1rem; }
   .anker__unten { flex-direction: column; }
 }
